@@ -99,3 +99,14 @@ FROM
 WHERE
 	InvoiceDate >= '2011-01-01' AND InvoiceDate <= '2012-12-31'
 )
+AND 
+	InvoiceDate >= '2011-01-01' AND InvoiceDate <= '2012-12-31'
+
+/* Average amount of transactions for each year */ 
+SELECT 
+round(avg(total),2) AS [avg TRANSACTION Amount],
+strftime('%Y',InvoiceDate) AS [Year]
+FROM
+	Invoice
+GROUP BY
+	strftime('%Y',InvoiceDate)
