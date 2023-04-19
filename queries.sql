@@ -110,3 +110,30 @@ FROM
 	Invoice
 GROUP BY
 	strftime('%Y',InvoiceDate)
+
+/*get a list of employees who exceeded the average transaction amount from sales 2011-2012*/
+
+
+SELECT
+	e.FirstName,
+	e.LastName,
+	sum(i.total) AS [Total Sales]
+FROM
+	Invoice i
+INNER JOIN
+	Customer c
+ON 
+	i.CustomerId = c.CustomerId
+INNER JOIN	
+	Employee e 
+ON 
+	e.Employeeid = c.SupportRepId
+WHERE
+	InvoiceDate >= '2011-01-01' AND InvoiceDate <= '2012-12-31'
+AND 
+	i.Total > '11.66'
+GROUP BY
+	e.FirstName,
+	e.LastName
+ORDER BY 
+	e.LastName
